@@ -5,3 +5,4 @@ signal_file="/tmp/stop_signal_4_to_infinity_and_beyond"
 
 # Create the signal file to stop the process
 touch "$signal_file"
+
