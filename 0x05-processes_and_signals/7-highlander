@@ -3,16 +3,16 @@
 # It responds to SIGTERM by displaying "I am invincible!!!".
 
 # Function to handle SIGTERM signal
-handle_sigterm() {
+function handle_sigterm() {
     echo "I am invincible!!!"
-    exit 0
 }
 
 # Trap SIGTERM signal and call the handle_sigterm function
 trap 'handle_sigterm' SIGTERM
 
 # Run the loop with sleep 2 in between each iteration
-while true; do
+while true
+do
     echo "To infinity and beyond"
     sleep 2
 done
