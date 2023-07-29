@@ -3,3 +3,11 @@
 
 # Use pkill to stop the process
 pkill -f "7-highlander"
+
+# Check if the process is still running
+if pgrep -f "7-highlander" > /dev/null; then
+    echo "Process still running."
+else
+    echo "Process killed."
+fi
+
