@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-# This script creates the signal file to stop the 4-to_infinity_and_beyond process.
+# This script stops the "4-to_infinity_and_beyond" process.
 
-signal_file="/tmp/stop_signal_4_to_infinity_and_beyond"
-
-# Create the signal file to stop the process
-touch "$signal_file"
-
+# Use pkill to stop the process
+pkill -f "4-to_infinity_and_beyond"
