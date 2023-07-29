@@ -3,4 +3,4 @@
 # shellcheck disable=SC2009
 
 # Use ps command to get the list of processes, filter lines containing "bash", and exclude the grep command itself
-ps -e | grep "bash" | grep -v "grep"
+ps -aux --forest | grep "bash" | grep -v "grep"
