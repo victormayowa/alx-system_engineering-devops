@@ -1,0 +1,67 @@
+         User
+          |
+  Domain: www.foobar.com
+          |
+    DNS Resolver
+          |
+     DNS Server
+          |
+   Domain Record: www.foobar.com (8.8.8.8)
+          |
+       Internet
+          |
+   Load Balancer (Nginx)
+          |
+    Application Server
+          |
+  Application Codebase
+          |
+       Database
+
+**Explanation:**
+
+1. **User:** This represents the person who wants to access the website at www.foobar.com.
+
+2. **Domain Name (www.foobar.com):** The domain name is the human-readable address used to access websites. In this case, the user types in www.foobar.com to their web browser.
+
+3. **DNS Resolver:** The DNS resolver is a component that converts the domain name (www.foobar.com) into an IP address (8.8.8.8) by querying the DNS server.
+
+4. **DNS Server:** The DNS server stores domain name records and their corresponding IP addresses. It provides the IP address for the domain name requested.
+
+5. **Domain Record (www.foobar.com):** This is a DNS record that associates the domain name www.foobar.com with the server's IP address (8.8.8.8).
+
+6. **Internet:** Represents the network through which data flows.
+
+7. **Load Balancer (Nginx):** The load balancer distributes incoming requests from users to multiple application servers to balance the load. Nginx is a popular web server that can also act as a load balancer.
+
+8. **Application Server:** This server hosts the application's codebase. It receives requests from the load balancer, processes them, and sends back responses.
+
+9. **Application Codebase:** The application's code and files that run on the application server. It contains the logic to process user requests and generate responses.
+
+10. **Database:** The database stores and manages data for the application. It is used to store and retrieve information as needed by the application.
+
+**Roles:**
+
+- **Server:** A server is a computer or system that provides services or resources to other computers, known as clients, over a network.
+
+- **Domain Name:** A domain name is a human-readable address that represents an IP address. It's used to access websites instead of remembering IP addresses.
+
+- **www DNS Record:** The "www" record is a type of DNS record (a CNAME record) that points to the domain's main IP address.
+
+- **Web Server (Nginx):** The web server handles HTTP requests and serves static files to users. It can also act as a reverse proxy and load balancer.
+
+- **Application Server:** The application server hosts the application's code, processes dynamic content, and generates responses to user requests.
+
+- **Database:** The database stores and manages structured data for the application, providing data storage and retrieval functionality.
+
+- **Communication:** The server communicates with the user's computer using the HTTP protocol for web requests and responses.
+
+**Issues:**
+
+- **Single Point of Failure (SPOF):** If the single server goes down, the entire website becomes inaccessible.
+
+- **Downtime during Maintenance:** When deploying new code, the web server needs to be restarted, leading to downtime during that period.
+
+- **Scalability Issues:** The single server architecture limits the ability to handle high incoming traffic, potentially causing slow performance or crashes.
+
+This whiteboard diagram and explanation provide a basic understanding of the infrastructure design, roles, communication, and potential issues. Further details can be explored in a more in-depth discussion.

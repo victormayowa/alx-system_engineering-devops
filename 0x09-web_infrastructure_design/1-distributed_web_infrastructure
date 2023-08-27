@@ -1,0 +1,78 @@
+         User
+          |
+  Domain: www.foobar.com
+          |
+    DNS Resolver
+          |
+     DNS Server
+          |
+   Domain Record: www.foobar.com (LB IP)
+          |
+       Internet
+          |
+  Load Balancer (HAproxy)
+     /      |      \
+Server 1  Server 2   ... (more servers)
+  |         |
+  |         |
+ Nginx    Nginx
+  |         |
+  |         |
+App Server App Server
+  |         |
+  |         |
+Application Codebase
+          |
+      Database
+  (Primary-Replica Cluster)
+```
+
+**Explanation:**
+
+1. **User:** Represents the person wanting to access the website.
+
+2. **Domain Name (www.foobar.com):** The domain name the user enters in their web browser.
+
+3. **DNS Resolver:** Converts the domain name into an IP address using DNS.
+
+4. **DNS Server:** Stores domain records and IP addresses.
+
+5. **Domain Record (www.foobar.com):** Associates the domain name with the load balancer's IP.
+
+6. **Internet:** Network for data transmission.
+
+7. **Load Balancer (HAproxy):** Distributes incoming requests across multiple servers using a distribution algorithm. HAproxy is used here.
+
+8. **Servers:** Multiple servers hosting the website.
+
+9. **Nginx:** Web server that handles requests, serves static files, and acts as a reverse proxy.
+
+10. **App Server:** Hosts application code, processes dynamic content, and generates responses.
+
+11. **Application Codebase:** Contains the website's logic and files.
+
+12. **Database (Primary-Replica Cluster):** Stores and manages application data.
+
+**Additional Elements and Explanations:**
+
+- **Load Balancer (HAproxy):** Added to distribute incoming requests across servers for load balancing, enhancing performance and redundancy.
+
+- **Database (Primary-Replica Cluster):** Implemented to ensure data availability and redundancy. Primary node handles writes, while replicas handle reads.
+
+- **Distribution Algorithm:** The load balancer uses a Round Robin distribution algorithm to evenly distribute requests among servers.
+
+- **Active-Active vs. Active-Passive Setup:** This setup is Active-Active, meaning all servers are actively serving traffic. In Active-Passive, only one set of servers is active while the others are on standby.
+
+- **Database Primary-Replica Cluster:** Primary node handles write operations, ensuring consistency. Replica nodes handle read operations, improving scalability and performance.
+
+- **Difference between Primary and Replica in Application:** The primary node handles write operations and updates to the database. Replicas handle read operations, providing faster access to data.
+
+**Issues with the Infrastructure:**
+
+- **Single Points of Failure (SPOF):** Load balancer, application servers, and database can become SPOFs if they fail.
+
+- **Security Issues:** No mention of firewalls or HTTPS, making the infrastructure vulnerable to attacks and data breaches.
+
+- **Lack of Monitoring:** No monitoring tools mentioned, leading to difficulty in identifying and addressing issues promptly.
+
+This whiteboard design provides a comprehensive overview of the distributed web infrastructure, addressing the questions and requirements you provided. For more details, a deeper discussion would be necessary.

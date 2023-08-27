@@ -1,0 +1,91 @@
+**Whiteboard Diagram:**
+```
+         User
+          |
+  Domain: www.foobar.com
+          |
+    DNS Resolver
+          |
+     DNS Server
+          |
+   Domain Record: www.foobar.com (LB IP)
+          |
+       Internet
+          |
+  Load Balancer (SSL Termination)
+     /      |      \
+Server 1  Server 2   Server 3
+ | | |      | | |      | | |
+FW FW FW   FW FW FW   FW FW FW
+  |         |         |
+ Nginx    Nginx      Nginx
+  |         |         |
+SSL Cert  SSL Cert   SSL Cert
+  |         |         |
+App Server App Server App Server
+  |         |         |
+Application Codebase
+          |
+      Database (Primary-Replica Cluster)
+        |         |         |
+     Replica   Replica   Replica
+          |
+     Monitoring Clients
+  (Sumologic or other service)
+```
+
+**Explanation:**
+
+1. **User:** Represents the person wanting to access the secure website.
+
+2. **Domain Name (www.foobar.com):** The domain name the user enters in their web browser.
+
+3. **DNS Resolver:** Converts the domain name into an IP address using DNS.
+
+4. **DNS Server:** Stores domain records and IP addresses.
+
+5. **Domain Record (www.foobar.com):** Associates the domain name with the load balancer's IP.
+
+6. **Internet:** Network for data transmission.
+
+7. **Load Balancer (SSL Termination):** Handles SSL encryption/decryption and distributes requests to servers.
+
+8. **Servers:** Multiple servers hosting the website.
+
+9. **Firewalls (FW):** Added for network security, controlling incoming/outgoing traffic.
+
+10. **Nginx:** Web server that handles requests, serves static files, and acts as a reverse proxy.
+
+11. **SSL Certificates:** Enable HTTPS encryption, securing data transmission.
+
+12. **App Server:** Hosts application code, processes dynamic content, and generates responses.
+
+13. **Application Codebase:** Contains the website's logic and files.
+
+14. **Database (Primary-Replica Cluster):** Stores and manages application data.
+
+15. **Replicas:** Handle read operations, improving performance and scalability.
+
+16. **Monitoring Clients:** Collect data for monitoring services (e.g., Sumologic).
+
+**Additional Elements and Explanations:**
+
+- **Firewalls:** Added for security to control and filter incoming/outgoing traffic, preventing unauthorized access.
+
+- **SSL Certificates:** Serve traffic over HTTPS to encrypt data transmission, enhancing security and privacy.
+
+- **Monitoring:** Used to track performance, diagnose issues, and ensure system availability.
+
+- **Monitoring Data Collection:** Monitoring clients collect data on server performance, traffic, errors, etc., and send it to monitoring services.
+
+- **Monitoring Web Server QPS:** To monitor web server queries per second (QPS), configure monitoring tools to track incoming requests.
+
+**Issues with the Infrastructure:**
+
+- **SSL Termination at Load Balancer:** Terminating SSL at the load balancer can expose encrypted data within the internal network.
+
+- **Single MySQL Server for Writes:** A single MySQL server accepting writes can become a bottleneck and point of failure.
+
+- **Homogeneous Servers:** Having identical components (database, web server, app server) can lead to limited flexibility and adaptability.
+
+This design addresses security, encryption, and monitoring needs. For deeper understanding and implementation, further discussion is required.

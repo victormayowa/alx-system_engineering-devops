@@ -1,0 +1,66 @@
+       User
+        |
+Domain: www.foobar.com
+        |
+  DNS Resolver
+        |
+   DNS Server
+        |
+ Domain Record: www.foobar.com (LB IP)
+        |
+     Internet
+        |
+Load Balancer Cluster (HAproxy)
+   /     |      \
+Server 1  Server 2
+ | | |      | | |
+FW FW FW   FW FW FW
+  |         |     |
+ Nginx    Nginx   Nginx
+  |         |       |
+App Server App Server App Server
+  |         |       |
+Application Codebase
+          |
+Database Cluster (Master-Slave)
+    |            |
+  Master       Slave
+```
+
+**Explanation:**
+
+1. **User:** Represents the person wanting to access the website.
+
+2. **Domain Name (www.foobar.com):** The domain name the user enters in their web browser.
+
+3. **DNS Resolver:** Converts the domain name into an IP address using DNS.
+
+4. **DNS Server:** Stores domain records and IP addresses.
+
+5. **Domain Record (www.foobar.com):** Associates the domain name with the load balancer's IP.
+
+6. **Internet:** Network for data transmission.
+
+7. **Load Balancer Cluster (HAproxy):** Distributes incoming requests to a cluster of servers, enhancing scalability and availability.
+
+8. **Servers:** Multiple servers in the cluster hosting the website.
+
+9. **Firewalls (FW):** Added for network security, controlling incoming/outgoing traffic.
+
+10. **Nginx:** Web server that handles requests, serves static files, and acts as a reverse proxy.
+
+11. **App Server:** Hosts application code, processes dynamic content, and generates responses.
+
+12. **Application Codebase:** Contains the website's logic and files.
+
+13. **Database Cluster (Master-Slave):** Ensures redundancy and availability of the database.
+
+**Additional Elements and Explanations:**
+
+- **Load Balancer Cluster (HAproxy):** Added to distribute incoming requests across servers, enhancing scalability and fault tolerance.
+
+- **Database Cluster (Master-Slave):** Provides data redundancy and availability. The master handles writes, and the slave handles reads, improving performance.
+
+- **Split Components:** Separating web server, application server, and database onto dedicated servers improves modularity, security, and scalability.
+
+The design provided follows the specified requirements and includes elements that enhance scalability and availability. Further discussion and implementation would be needed for a complete understanding and setup.
