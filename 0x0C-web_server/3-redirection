@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# This script configures nginx to redirect /redirect_me to another page with a 301 Moved Permanently status
+
+# Check if nginx is installed
+if ! command -v nginx &> /dev/null; then
+    echo "Nginx is not installed. Please run the installation script first."
+    exit 1
+fi
+
+# Create a custom HTML page for the redirection
+echo '<html><head><meta http-equiv="refresh" content="0;url=https://www.youtube.com/watch?v=QH2-TGUlwu4"></head></html>' > /var/www/html/redirect_me
+
+# Add a new location block to the default site configuration
+sed -i '/server {/a \\tlocation /redirect_me { return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4; }' /etc/nginx/sites-available/default
+
+# Restart nginx
+/etc/init.d/nginx reload
+
+echo "Redirection configured successfully!"
