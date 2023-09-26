@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # This script installs and configures nginx web server
-
 # Install nginx
 apt-get update -y
 apt-get install -y nginx
