@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#configure
+# Update package lists and install nginx
+sudo apt-get update
+sudo apt-get -y install nginx
+
+# Define custom header
+CUSTOM_HEADER="add_header X-Served-By \$HOSTNAME always;"
+
+# Add custom header to Nginx configuration
+sudo sed -i "/listen 80 default_server;/a $CUSTOM_HEADER" /etc/nginx/sites-available/default
+
+# Restart nginx service
+sudo service nginx restart
