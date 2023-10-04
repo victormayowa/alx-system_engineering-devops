@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+service nginx status | grep -q "nginx is not running" && service nginx start
+netstat -tuln | grep -q ":80 " || (sed -i 's/^\s*listen\s*80\s*;/\tlisten 80;/' /etc/nginx/sites-available/default && service nginx restart)
