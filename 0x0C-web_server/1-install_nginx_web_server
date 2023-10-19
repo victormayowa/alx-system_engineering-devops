@@ -1,25 +1,15 @@
 #!/usr/bin/env bash
 # This script installs and configures nginx web server
 # Install nginx
-apt-get update -y
-apt-get install -y nginx
-
-# Start nginx (if not already running)
-if ! pgrep -x "nginx" > /dev/null; then
-    nginx
-fi
-
-# Check if nginx is listening on port 80
-if ! nc -z localhost 80; then
-    echo "Nginx is not listening on port 80. Please check the installation."
-    exit 1
-fi
+sudo apt-get update -y
+sudo apt-get install -y nginx
+#listen at port 80
+sudo ufw 'Nginx HTTP'
 
 # Create a custom HTML page
-echo "Hello World!" > /var/www/html/index.html
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
+#testing nginx config
+sudo nginx -t
 # Restart nginx
-/etc/init.d/nginx reload
-
-# Display success message
-echo "Nginx installed and configured successfully!"
+sudo service nginx reload
