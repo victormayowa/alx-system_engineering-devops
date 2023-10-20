@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# fixing the nginx linking the default configuration file from available to enabled
+rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo service nginx restart
