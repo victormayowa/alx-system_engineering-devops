@@ -10,13 +10,13 @@ def todos(id):
     user = requests.get(user_link).json()
     todo_link = "https://jsonplaceholder.typicode.com/users/{}/todos".format(id)
     todo_list = requests.get(todo_link).json()
-    user = user["username"]
+    username = user["username"]
     file = "{}.csv".format(id)
     with open(file, "w") as f:
         for todo in todo_list:
             line = '"{}","{}","{}","{}"\n'.format(
                 id,
-                user,
+                username,
                 str(todo["completed"]),
                 todo["title"]
             )
