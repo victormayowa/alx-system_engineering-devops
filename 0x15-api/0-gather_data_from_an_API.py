@@ -1,15 +1,15 @@
 #!/usr/bin/python3
-'''Pythonic API'
+'''Pythonic API'''
 import requests
 import sys
 
 
 def get_todo_progress(employee_id):
-    user_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
-    todo_url = f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}"
+    user = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
+    todo = f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}"
 
-    user_response = requests.get(user_url)
-    todo_response = requests.get(todo_url)
+    user_response = requests.get(user)
+    todo_response = requests.get(todo)
 
     if user_response.status_code != 200 or todo_response.status_code != 200:
         print("Error: Unable to fetch data from the API.")
@@ -22,8 +22,8 @@ def get_todo_progress(employee_id):
     completed_tasks = [task for task in todo_data if task["completed"]]
     total_tasks = len(todo_data)
 
-    print(f"Employee {employee_name} is done with tasks({len(completed_tasks)}/{total_tasks}):")
-
+    print(f"Employee {employee_name} is done with tasks"
+          f"({len(completed_tasks)}/{total_tasks}):")
     for task in completed_tasks:
         print(f"    {task['title']}")
 
