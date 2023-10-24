@@ -8,8 +8,8 @@ def todos(id):
     """exports"""
     user_link = "https://jsonplaceholder.typicode.com/users/{}".format(id)
     user = requests.get(user_link).json()
-    todo_link = "https://jsonplaceholder.typicode.com/users/{}/todos".format(id)
-    todo_list = requests.get(todo_link).json()
+    link = "https://jsonplaceholder.typicode.com/users/{}/todos".format(id)
+    todo_list = requests.get(link).json()
     username = user["username"]
     file = "{}.csv".format(id)
     with open(file, "w") as f:
