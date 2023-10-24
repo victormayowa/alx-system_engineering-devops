@@ -6,11 +6,11 @@ import csv
 
 
 def export_to_csv(employee_id):
-    user_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
-    todo_url = f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}"
+    user = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
+    todo = f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}"
 
-    user_response = requests.get(user_url)
-    todo_response = requests.get(todo_url)
+    user_response = requests.get(user)
+    todo_response = requests.get(todo)
 
     if user_response.status_code != 200 or todo_response.status_code != 200:
         print("Error: Unable to fetch data from the API.")
@@ -26,7 +26,8 @@ def export_to_csv(employee_id):
 
     with open(file_name, mode='w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(['USER_ID', 'USERNAME', 'TASK_COMPLETED_STATUS', 'TASK_TITLE'])
+        writer.writerow(['USER_ID', 'USERNAME',
+                         'TASK_COMPLETED_STATUS', 'TASK_TITLE'])
 
         for task in todo_data:
             task_id = task["id"]
