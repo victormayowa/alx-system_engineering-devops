@@ -13,7 +13,7 @@ def count_words(subreddit, word_list, found_list=[], after=None):
     '''
     user = {'User-agent': 'test45'}
     p = requests.get('http://www.reddit.com/r/{}/hot.json?after={}'
-                         .format(subreddit, after), headers=user)
+                     .format(subreddit, after), headers=user)
     if after is None:
         wlist = [word.lower() for word in word_list]
 
