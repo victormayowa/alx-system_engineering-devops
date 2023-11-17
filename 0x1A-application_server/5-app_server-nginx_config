@@ -1,0 +1,57 @@
+# Define a server block listening on port 80 for both IPv4 and IPv6
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    # Set the root directory for the server
+    root /var/www/html;
+    
+    # Define default files to look for
+    index index.html index.htm index.nginx-debian.html;
+
+    # Server name. This block will respond to all requests regardless of the Host header
+    server_name _;
+
+    # Location block for the root directory
+    location / {
+        # Proxy pass requests to the specified local port with a path /2-hbnb
+        proxy_pass http://localhost:5003/2-hbnb;
+    }
+
+    # Location block for serving static files
+    location /static/ {
+        # Uncomment the next line if you want to handle query strings
+        # rewrite ^(/static/[^?]*)\?.*$ $1 last;
+        
+        # Alias to the specified directory for static files
+        alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static/;
+        try_files $uri $uri/ =404;
+    }
+
+    # Location block for proxying requests to /airbnb-onepage/
+    location /airbnb-onepage/ {
+        proxy_pass http://localhost:5000;
+    }
+
+    # Location block for proxying requests to /airbnb-dynamic/
+    location /airbnb-dynamic/ {
+        proxy_pass http://localhost:5001/;
+    }
+
+    # Location block for proxying requests to /api/
+    location /api/ {
+        proxy_pass http://localhost:5002;
+    }
+
+    # If the request filename contains 'redirect_me', redirect to a different URL permanently
+    if ($request_filename ~ redirect_me){
+        rewrite ^ https://sketchfab.com/bluepeno/models permanent;
+    }
+
+    # Custom error page for 404 errors
+    error_page 404 /404.html;
+    location = /404.html {
+        root /var/www/error/;
+        internal;
+    }
+}

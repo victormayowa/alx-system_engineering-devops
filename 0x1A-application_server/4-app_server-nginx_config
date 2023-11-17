@@ -1,0 +1,50 @@
+server {
+    # Listen on port 80 for both IPv4 and IPv6
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    # Set root directory and index files
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+
+    # Allow the server to respond to any host name
+    server_name _;
+
+    # Default location ("/")
+    location / {
+        # Try to serve the requested URI, or return a 404 if not found
+        try_files $uri $uri/ =404;
+    }
+
+    # Location for "/airbnb-onepage/"
+    location /airbnb-onepage/ {
+        # Proxy requests to http://localhost:5000
+        proxy_pass http://localhost:5000;
+    }
+
+    # Location for "/airbnb-dynamic/"
+    location /airbnb-dynamic/ {
+        # Proxy requests to http://localhost:5001/
+        proxy_pass http://localhost:5001/;
+    }
+
+    # Location for "/api/"
+    location /api/ {
+        # Proxy requests to http://localhost:5002
+        proxy_pass http://localhost:5002;
+    }
+
+    # Rewrite rule
+    if ($request_filename ~ redirect_me) {
+        # Permanent redirect to "https://sketchfab.com/bluepeno/models"
+        rewrite ^ https://sketchfab.com/bluepeno/models permanent;
+    }
+
+    # Error pages
+    error_page 404 /404.html;
+    location = /404.html {
+        # Custom error page location
+        root /var/www/error/;
+        internal;
+    }
+}
